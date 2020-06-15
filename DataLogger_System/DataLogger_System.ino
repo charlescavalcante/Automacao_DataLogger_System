@@ -1,4 +1,4 @@
-/*Codigo para Executação de um datalog usando a placa lógica arduino e alguns componentes
+/*Codigo para Executação de um datalogger usando a placa lógica arduino e alguns componentes
   Esse trabalho é para vim de pesquisa de Iniciação Cientifíca da UFMT-Cuiabá
 **Autor: Charles E. Cavalcante -> Graduando em Agronomia
   Componentes utilizados:
@@ -102,7 +102,7 @@ void loop()
   Serial.print("\t\t");
   Serial.print(dht.readHumidity());      //Imprimindo a umidade
   Serial.println("");
-  i +=1;
+
 
  //Bloco para gravar os dados lidos pelo DHT22 e RTC
  
@@ -128,4 +128,5 @@ void loop()
   }
 
   delay (900000); // Intervalo de 15 minutos para a proxima leitura e gravação no arquivo
+  i +=1;
 }
