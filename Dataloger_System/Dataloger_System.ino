@@ -14,8 +14,8 @@
 #include <DS3231.h>   //Inclui a Biblioteca para manipulação do DS3231
 #include "DHT.h"      //Inclui a Biblioteca para manipulação do DHT22
 
-#define DHTPIN 2      //Define para o pino 2 a comunicação
-#define DHTTYPE DHT22 // Define qual sensor será utilizado
+#define DHTPIN 2      //Define para o pino 2 a comunicação do DHT
+#define DHTTYPE DHT22 // Define qual Modelo de sensor será utilizado (DHT22)
 
 const int chipSelect = 10; // declarando o pino responsável por ativar o módulo SD
 File arquivo;              //Declarando o objeto responsavel para escrever/ler o arquivo no Cartão SD
@@ -25,8 +25,7 @@ RTCDateTime dataehora;     // Declarando o objeto do tipo RTCDateTime
 
 DHT dht(DHTPIN, DHTTYPE);  // Declarando o objeto responsável pela comunicação/sensor
 
-int i = 1;                 // Declarando o contador de nº de leituras
-
+int i = 1; 
 void setup()
 {
   // put your setup code here, to run once:
@@ -51,37 +50,39 @@ void setup()
   Serial.println ("----------------------------------------------------");
 
   // Bloco para o cabeçalho da Tabela no Arquivo texto
-  String RotuloTabela = ""; //Declarando e limpando o Vetor de dados
-  RotuloTabela = "  Data\t\t Hora \t   Temperatura(ºC)\tUmidade (%)";     // Cabeçalho da Tabela
+  String RotuloTabela = ""; //Declarando e limpando a variavel que recebera o cabeçalho da tabela
+  RotuloTabela = "  Data\t\t Hora \t   Temperatura(ºC)\tUmidade (%)";     // atribuindo valores do Cabeçalho da Tabela
 
   File arquivo = SD.open("DateLog.txt", FILE_WRITE); // Declarando e abrindo o arquivo onde será armazenado os dados da leitura do DTH e RTC
 
   if (arquivo) {
-    arquivo.println(RotuloTabela);  // Escrevemos no arquivo o valor da string RotuloTabela e pulamos uma linha
-    arquivo.close();           // Fechamos o arquivo
+    arquivo.println(RotuloTabela);  // Escreve no arquivo o valor da string RotuloTabela e pulamos uma linha
+    arquivo.close();           // Fechamento do arquivo
   }
   
-  Serial.println("Vamos o que tem no arquivo_____________________________________________");
+  Serial.println("Dados contidos no arquivo");
+  Serial.println("---------------------------");
+  delay (1500);
   arquivo = SD.open("DateLog.txt", FILE_READ); // Abre o Arquivo
   if (arquivo) {
-    while (arquivo.available()) { // Exibe o conteúdo do Arquivo
-      Serial.write(arquivo.read());
+    while (arquivo.available()) { // Verifica existencia de dados no arquivo
+      Serial.write(arquivo.read()); // Exibe o conteúdo do Arquivo enquanto encontrar dados 
     }
     arquivo.close(); // Fecha o Arquivo após ler
   }
   else {
-    Serial.println("Erro ao Abrir Arquivo .txt"); // Imprime na tela
+    Serial.println("Erro ao Abrir Arquivo .txt"); // Imprime na tela caso ocorra erro ao abrir o arquivo
   }
-
-  delay (5000);
+  delay (1500);
 }
 
 void loop()
 {
   // put your main code here, to run repeatedly:
+  
   dataehora = rtc.getDateTime();     //Atribuindo valores instantâneos de data e hora à instancia dataehora
   if (i == 1){
-    Serial.println ("___________Dados Lidos do DHT22_____________ \n");      //Imprimindo o Dia
+    Serial.println ("___________Dados Lidos do DHT22 & RTC 3231_____________ \n");      //Imprimindo o Dia
     Serial.println ("  Data\t\t Hora \t   Temperatura(ºC)\tUmidade (%)");
   }
   
@@ -97,58 +98,34 @@ void loop()
   Serial.print(":");
   Serial.print(dataehora.second);   //Imprimindo o Segundo
   Serial.print("\t\t");
-  Serial.print(dht.readTemperature());
+  Serial.print(dht.readTemperature());   //Imprimindo a temperatura
   Serial.print("\t\t");
-  Serial.print(dht.readHumidity());
+  Serial.print(dht.readHumidity());      //Imprimindo a umidade
   Serial.println("");
   i +=1;
- 
- /*// Declarando e Limpando Variáveis
-  
-  float temperatura = 0 ; 
-  float umidade = 0;      
-  String Data = "";
-  String Time = "";
-  String leitura = "";
-  String dht22 = "";
 
-  Data = (dataehora.day) + "/" + (dataehora.month) + "/" + (dataehora.year) + "\t";
-  
-  Time = (dataehora.hour) + ":" + (dataehora.minute)+ ":" + (dataehora.second) + "\t\t";
-  
-  temperatura = dht.readTemperature(); // Função que realiza a leitura da temperatura do sensor dht11
-  umidade = dht.readHumidity();        // Função que realiza a leitura da umidade do sensor dht11
-
-  // Se tudo estiver ok, escrevemos os dados a serem armazenados em uma String
-  dht22 = (temperatura) + "\t\t" + (umidade);
-  leitura = (Data) + "\t\t" + (Time) + "\t\t" + (dht22);
-  
-  Serial.println("Salvando dados no arquivo_____________________________________________");
-  Serial.println(leitura);
+ //Bloco para gravar os dados lidos pelo DHT22 e RTC
  
-  delay (2000);
-  */
   File arquivo = SD.open("DateLog.txt", FILE_WRITE); // Abre o Arquivo
   if (arquivo) {
-    //arquivo.println(leitura);  // Escrevemos no arquivo o valor da string RotuloTabela e pulamos uma linha
-    arquivo.print(dataehora.day);      //Imprimindo o Dia
+    arquivo.print(dataehora.day);      //Armazena no arquivo o Dia
     arquivo.print("/");
-    arquivo.print(dataehora.month);    //Imprimindo o Mês
+    arquivo.print(dataehora.month);    //Armazena no arquivo o Mês
     arquivo.print("/");
-    arquivo.print(dataehora.year);     //Imprimindo o Ano
+    arquivo.print(dataehora.year);     //Armazena no arquivo o Ano
     arquivo.print("\t");
-    arquivo.print(dataehora.hour);     //Imprimindo a Hora
+    arquivo.print(dataehora.hour);     //Armazena no arquivo a Hora
     arquivo.print(":");
-    arquivo.print(dataehora.minute);   //Imprimindo o Minuto
+    arquivo.print(dataehora.minute);   //Armazena no arquivo o Minuto
     arquivo.print(":");
-    arquivo.print(dataehora.second);   //Imprimindo o Segundo
+    arquivo.print(dataehora.second);   //Armazena no arquivo o Segundo
     arquivo.print("\t\t");
-    arquivo.print(dht.readTemperature());
+    arquivo.print(dht.readTemperature());   //Armazena no arquivo a Temperatura
     arquivo.print("\t\t");
-    arquivo.print(dht.readHumidity());
+    arquivo.print(dht.readHumidity());      //Armazena no arquivo a Umidade
     arquivo.println("");
     arquivo.close();           // Fechamos o arquivo
   }
 
-  delay (900000);
+  delay (900000); // Intervalo de 15 minutos para a proxima leitura e gravação no arquivo
 }
