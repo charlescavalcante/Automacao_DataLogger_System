@@ -1,12 +1,13 @@
 /*Codigo para Executação de um datalogger usando a placa lógica arduino e alguns componentes
   Esse trabalho é para vim de pesquisa de Iniciação Cientifíca da UFMT-Cuiabá
+  
 **Autor: Charles E. Cavalcante -> Graduando em Agronomia
   Componentes utilizados:
   • Microcontrolador Arduino UNO R3;
-  • Sensor DTH22 -> Coneção: **1º Perna -> 5v, 2º A1, "" 4º GNG; (3º perna não utilizada)
-  • Módulo Micro SD -> Coneção: ** MOSI -> pin 11, ** MISO -> pin 12,  ** CLK -> pin 13, ** CS -> pin 10
-  • Módulo RTC DS3231 -> Coneção: **GND -> GND, ** VCC -> 5v,  ** SDA -> A4, ** SCL -> A5
-  • protoboard 400 furo;
+  • Sensor DHT22 -> Coneção: **1º Perna -> 5v, 2º pin 2, "" 4º GNG; (3º perna não utilizada);
+  • Módulo Micro SD -> Coneção: ** MOSI -> pin 11, ** MISO -> pin 12,  ** CLK -> pin 13, ** CS -> pin 10;
+  • Módulo RTC DS3231 -> Coneção: **GND -> GND, ** VCC -> 5v,  ** SDA -> A4, ** SCL -> A5;
+  • protoboard 400 furos.
   ____________________________________________________________________________________________________*/
 #include <SPI.h>      // Biblioteca de comunicação SPI Nativa
 #include <SD.h>       //Inclui a Biblioteca para manipulação SD nativa
