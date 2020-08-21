@@ -6,10 +6,10 @@ o qual irá captar a temperatura e umidade do ar e armazenar esses dados junto c
 Esse trabalho é a fim de Pesquisa de Iniciação Cientifíca da UFMT-Cuiabá.
 Pesquisa vinculada ao Projeto AUTOMAÇÃO E INTELIGÊNCIA ARTIFICIAL EM PROCESSOS AGROPECUÁRIOS E FLORESTAIS.
 
-Faculdade de Agronomia e Zootecnia - FAAZ/UFMT
-Orientador: Prof. Dr. Pedro Hurtado de Mendoza Borges
-Departamento de Solos e Engenharia Rural - DSER
-Autor: Charles Esteffan Cavalcante -> Graduando em Agronomia
+Faculdade de Agronomia e Zootecnia - FAAZ/UFMT;
+Orientador: Prof. Dr. Pedro Hurtado de Mendoza Borges;
+Departamento de Solos e Engenharia Rural - DSER;
+Autor: Charles Esteffan Cavalcante -> Graduando em Agronomia.
 
 
 O Código é para a confecção de um datalogger usando a placa lógica arduino (R3) e alguns componentes.
