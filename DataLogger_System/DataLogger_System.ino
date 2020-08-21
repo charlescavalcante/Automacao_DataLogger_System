@@ -1,12 +1,12 @@
 /*Codigo para Executação de um datalogger usando a placa lógica arduino e alguns componentes
-  Esse trabalho é para vim de pesquisa de Iniciação Cientifíca da UFMT-Cuiabá
+  Esse trabalho é para a fim de pesquisa de Iniciação Cientifíca da UFMT-Cuiabá
   
 **Autor: Charles E. Cavalcante -> Graduando em Agronomia
   Componentes utilizados:
   • Microcontrolador Arduino UNO R3;
-  • Sensor DHT22 -> Coneção: **1º Perna -> 5v, 2º pin 2, "" 4º GNG; (3º perna não utilizada);
-  • Módulo Micro SD -> Coneção: ** MOSI -> pin 11, ** MISO -> pin 12,  ** CLK -> pin 13, ** CS -> pin 10;
-  • Módulo RTC DS3231 -> Coneção: **GND -> GND, ** VCC -> 5v,  ** SDA -> A4, ** SCL -> A5;
+  • Sensor DHT22 -> Conexão: **1º Perna -> 5v, 2º pin 2, ** 4º GNG; (3º perna não utilizada);
+  • Módulo Micro SD -> Conexão: ** MOSI -> pin 11, ** MISO -> pin 12,  ** CLK -> pin 13, ** CS -> pin 10;
+  • Módulo RTC DS3231 -> Conexão: **GND -> GND, ** VCC -> 5v,  ** SDA -> A4, ** SCL -> A5;
   • protoboard 400 furos.
   ____________________________________________________________________________________________________*/
 #include <SPI.h>      // Biblioteca de comunicação SPI Nativa
@@ -43,7 +43,7 @@ void setup()
     Serial.println("Falha no cartao ou não está inserido");   // se o cartão não estiver inserido um aviso aparecerar na Monitor serial;
   }
 
-  // Se o cartão estiver inserido....
+  // Se o cartão estiver ins++erido....
   Serial.println("Cartão SD Inserido com sucesso "); // Mensagem de aviso de cartão SD conectado
   Serial.println ("-------------------------------");
   delay (1500);
@@ -128,6 +128,6 @@ void loop()
     arquivo.close();           // Fechamos o arquivo
   }
 
-  delay (900000); // Intervalo de 15 minutos para a proxima leitura e gravação no arquivo
+  delay (300000); // Intervalo de 5 minutos para a próxima leitura e gravação no arquivo
   i +=1;
 }
